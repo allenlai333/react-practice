@@ -17,29 +17,46 @@ let _todos = [
 
 const _deleteTodo = (todos, id) => {
     const index = todos.findIndex((todo) => todo.id === id);
-    if (index !== -1) todos.splice(index, 1);
-    return todos;
+    if (index === -1) return todos;
+
+    const newTodos = [...todos];
+    newTodos.splice(idx, 1);
+    return newTodos;
 }
 
 const _toggleTodo = (todos, id) => {
     const index = todos.findIndex((todo) => todo.id === id);
-    todos[index].completed = !todos[index].completed;
-    return todos;
+    if (index === -1) return todos;
+
+    const newTodos = [...todos];
+    newTodos[index] = {
+        ...todos[index],
+        completed: !todos[index].completed
+    }
+    return newTodos;
 }
 
 const _createTodo = (todos, title) => {
-    todos.push({
-        id: todos[todos.length - 1].id + 1,
-        title,
-        completed: false
-    });
-    return todos;
+    return [
+        ...todos,
+        {
+            id: todos[todos.length - 1].id,
+            title,
+            completed: false
+        }
+    ];
 }
 
 const _updateTodo = (todos, id, title) => {
-    const target = todos.find((todo) => todo.id === id);
-    if (target) target.title = title;
-    return todos;
+    const index = todos.findIndex((todo) => todo.id === id);
+    if (index === -1) return todos;
+    // 修改就回傳新陣列
+    const newTodos = [...todos];
+    newTodos[index] = {
+        ...todos[index],
+        title
+    };
+    return newTodos;
 };
 //--------------------------------------------------------------------
 
