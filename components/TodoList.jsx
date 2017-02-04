@@ -2,7 +2,7 @@ const { TodoItem } = window.App;
 
 class TodoList extends React.Component {
     render() {
-        const { todos, onDeleteTodo } = this.props;
+        const { todos, onDeleteTodo, onToggleTodo, onUpdateTodo } = this.props;
 
         return (
             <div>
@@ -15,7 +15,9 @@ class TodoList extends React.Component {
                                         id={todo.id}
                                         title = {todo.title}
                                         completed = {todo.completed}
-                                        onDelete={onDeleteTodo} 
+                                        onDelete={onDeleteTodo}
+                                        onToggle={onToggleTodo} 
+                                        onUpdate={(content) => onUpdateTodo && onUpdateTodo(todo.id, content)}
                                     />
                                 </li>
                             );
